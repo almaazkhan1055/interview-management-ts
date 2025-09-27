@@ -67,7 +67,7 @@ const Dashboard: React.FC = () => {
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8">
                     <div>
                         <h2 className="text-3xl font-bold text-gray-900">Dashboard</h2>
-                        <p className="text-gray-600 mt-2">Welcome back! Here's your overview</p>
+                        <p className="text-gray-600 mt-2">Welcome back! Here&apos;s your overview</p>
                     </div>
                     <div className="mt-4 sm:mt-0">
                         <span className="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full capitalize">
