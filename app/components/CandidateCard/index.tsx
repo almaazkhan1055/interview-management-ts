@@ -25,7 +25,6 @@ const CandidateCard: React.FC<CandidateCardProps> = ({ candidate }) => {
     return (
         <div className="bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100 overflow-hidden group">
             <div className="p-6">
-                {/* Header with name and status */}
                 <div className="flex justify-between items-start mb-4">
                     <h3 className="text-xl font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
                         {candidate.firstName} {candidate.lastName}
@@ -42,7 +41,6 @@ const CandidateCard: React.FC<CandidateCardProps> = ({ candidate }) => {
                     </span>
                 </div>
 
-                {/* Candidate details */}
                 <div className="space-y-3">
                     <div className="flex items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-400 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -82,7 +80,6 @@ const CandidateCard: React.FC<CandidateCardProps> = ({ candidate }) => {
                 </div>
             </div>
 
-            {/* Action buttons */}
             <div className="px-6 py-4 bg-gray-50 border-t border-gray-100">
                 <button
                     onClick={() => router.push(`/candidates/${candidate.id}`)}

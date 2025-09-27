@@ -13,19 +13,6 @@ const navLinks = [
 ];
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
-    const pathname = usePathname();
-    const router = useRouter();
-    const dispatch = useAppDispatch();
-    const [isSidebarOpen, setSidebarOpen] = useState(false);
-    const { username, role } = useAppSelector((state) => state.auth);
-
-    const handleLogout = () => {
-        sessionStorage.removeItem("token");
-        localStorage.removeItem("role");
-        dispatch(logout());
-        router.push("/login");
-    };
-
     return (
         <div className="bg-gray-100">
             <Header />

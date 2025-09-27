@@ -44,13 +44,11 @@ const Dashboard: React.FC = () => {
     });
 
     useEffect(() => {
-        // Ensure localStorage is only accessed on the client side
         setRole(localStorage.getItem("role"));
 
         axios.get<{ users: Candidate[] }>("https://dummyjson.com/users").then((res) => {
             setCandidates(res.data.users);
 
-            // Mock KPI data based on the fetched users
             const interviewsThisWeek = res.data.users.length;
             const averageFeedback = 4.2;
             const noShows = 2;
@@ -66,7 +64,6 @@ const Dashboard: React.FC = () => {
     return (
         <DashboardLayout>
             <div className="p-6 bg-gray-50 min-h-screen">
-                {/* Header */}
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8">
                     <div>
                         <h2 className="text-3xl font-bold text-gray-900">Dashboard</h2>
@@ -79,7 +76,6 @@ const Dashboard: React.FC = () => {
                     </div>
                 </div>
 
-                {/* KPI Cards Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
                     <KPICard
                         title="Interviews This Week"
@@ -104,7 +100,6 @@ const Dashboard: React.FC = () => {
                     />
                 </div>
 
-                {/* Filters Section */}
                 <div className="bg-white rounded-xl shadow-sm p-6 mb-8">
                     <h3 className="text-lg font-semibold text-gray-900 mb-4">Filters</h3>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -154,7 +149,6 @@ const Dashboard: React.FC = () => {
                     </div>
                 </div>
 
-                {/* Recent Activity Section */}
                 <div className="bg-white rounded-xl shadow-sm p-6">
                     <div className="flex justify-between items-center mb-6">
                         <h3 className="text-lg font-semibold text-gray-900">Recent Candidates</h3>

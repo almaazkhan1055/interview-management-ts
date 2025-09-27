@@ -30,6 +30,7 @@ const Sidebar: React.FC = () => {
     const router = useRouter();
     const pathname = usePathname();
     const [role, setRole] = useState<Role | null>(null);
+    const [isOpen, setIsOpen] = useState(true);
 
     useEffect(() => {
         const storedRole = localStorage.getItem("role") as Role | null;
@@ -47,33 +48,71 @@ const Sidebar: React.FC = () => {
     const items = menuItems[role] || [];
 
     return (
-        <aside className="w-72 bg-gradient-to-b from-white to-blue-50 border-r border-gray-200 h-full flex flex-col shadow-lg">
-            <div className="p-5 border-b border-gray-200">
-                <h2 className="text-xl font-bold bg-gradient-to-r from-blue-600 to-indigo-700 bg-clip-text text-transparent">
-                    Navigation
-                </h2>
-                <p className="text-xs text-gray-500 mt-1 capitalize">Welcome, {role.replace('_', ' ')}</p>
-            </div>
+        <>
+            {isOpen && (
+                <div
+                    className="fixed inset-0 bg-black/30 z-10 md:hidden"
+                    onClick={() => setIsOpen(false)}
+                ></div>
+            )}
 
-            {/* Navigation */}
-            <nav className="flex flex-col gap-1 p-3 flex-grow">
-                {items.map((item) => {
-                    const isActive = pathname.startsWith(item.path);
-                    return (
-                        <Link key={item.path} href={item.path} className={`flex items-center px-4 py-3 rounded-lg transition-all duration-200 group ${isActive ? "bg-gradient-to-r from-blue-600 to-indigo-700 text-white shadow-md" : "text-gray-600 hover:bg-blue-100 hover:text-blue-700"}`}>
-                            <span className="text-lg mr-3">{item.icon}</span>
-                            <span className="font-medium">{item.name}</span>
-                            {isActive && <div className="ml-auto w-2 h-2 bg-white rounded-full"></div>}
-                        </Link>
-                    );
-                })}
-            </nav>
+            <aside
+                className={`fixed top-14 left-0 h-full w-72 bg-gradient-to-b from-white to-blue-50 border-r border-gray-200 flex flex-col shadow-lg z-20 transform transition-transform duration-300 ease-in-out
+        ${isOpen ? "translate-x-0" : "-translate-x-full"} 
+        md:translate-x-0 md:static md:flex`}
+            >
+                <div className="p-5 border-b border-gray-200 flex flex-col">
+                    <div className="flex items-center justify-between">
+                        <h2 className="text-xl font-bold bg-gradient-to-r from-blue-600 to-indigo-700 bg-clip-text text-transparent">
+                            Navigation
+                        </h2>
+                        <button
+                            className="md:hidden text-gray-600 hover:text-gray-900"
+                            onClick={() => setIsOpen(false)}
+                        >
+                            ✖
+                        </button>
+                    </div>
+                    <p className="text-xs text-gray-500 mt-1 capitalize">
+                        Welcome, {role.replace("_", " ")}
+                    </p>
+                </div>
 
-            {/* Footer */}
-            <div className="p-4 border-t border-gray-200">
-                <div className="text-xs text-gray-500 text-center">v1.0.0</div>
-            </div>
-        </aside>
+                {/* Navigation */}
+                <nav className="flex flex-col gap-1 p-3 flex-grow">
+                    {items.map((item) => {
+                        const isActive = pathname.startsWith(item.path);
+                        return (
+                            <Link
+                                key={item.path}
+                                href={item.path}
+                                className={`flex items-center px-4 py-3 rounded-lg transition-all duration-200 group ${isActive
+                                    ? "bg-gradient-to-r from-blue-600 to-indigo-700 text-white shadow-md"
+                                    : "text-gray-600 hover:bg-blue-100 hover:text-blue-700"
+                                    }`}
+                            >
+                                <span className="text-lg mr-3">{item.icon}</span>
+                                <span className="font-medium">{item.name}</span>
+                                {isActive && <div className="ml-auto w-2 h-2 bg-white rounded-full"></div>}
+                            </Link>
+                        );
+                    })}
+                </nav>
+
+                <div className="p-4 border-t border-gray-200">
+                    <div className="text-xs text-gray-500 text-center">v1.0.0</div>
+                </div>
+            </aside>
+
+            {!isOpen && (
+                <button
+                    className="fixed top-5 left-5 z-20 p-2 bg-blue-600 text-white rounded-md md:hidden"
+                    onClick={() => setIsOpen(true)}
+                >
+                    ☰
+                </button>
+            )}
+        </>
     );
 };
 

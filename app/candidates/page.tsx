@@ -31,12 +31,10 @@ const Candidates: React.FC = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [sortField, setSortField] = useState<SortField>("firstName");
 
-    // filters
     const [filterDepartment, setFilterDepartment] = useState("");
     const [filterRole, setFilterRole] = useState("");
     const [filterStatus, setFilterStatus] = useState<InterviewStatus | "">("");
 
-    // Fetch candidates
     useEffect(() => {
         fetch("https://dummyjson.com/users?limit=208")
             .then((res) => res.json())
@@ -54,7 +52,6 @@ const Candidates: React.FC = () => {
             });
     }, []);
 
-    // Debounce search input
     useEffect(() => {
         const handler = setTimeout(() => {
             setDebouncedSearch(search);
@@ -63,7 +60,6 @@ const Candidates: React.FC = () => {
         return () => clearTimeout(handler);
     }, [search]);
 
-    // Filter candidates
     const filteredCandidates = candidates.filter((c) => {
         const query = debouncedSearch.toLowerCase();
 
@@ -85,7 +81,6 @@ const Candidates: React.FC = () => {
         return matchesSearch && matchesDepartment && matchesRole && matchesStatus;
     });
 
-    // Sort candidates
     const sortedCandidates = [...filteredCandidates].sort((a, b) => {
         let valA: string, valB: string;
 
@@ -116,7 +111,6 @@ const Candidates: React.FC = () => {
         return 0;
     });
 
-    // Pagination
     const totalPages = Math.ceil(sortedCandidates.length / ITEMS_PER_PAGE);
     const start = (currentPage - 1) * ITEMS_PER_PAGE;
     const paginatedCandidates = sortedCandidates.slice(
@@ -124,7 +118,6 @@ const Candidates: React.FC = () => {
         start + ITEMS_PER_PAGE
     );
 
-    // Unique values for filters
     const departments = [
         ...new Set(candidates.map((c) => c.company?.department).filter(Boolean)),
     ];
@@ -136,7 +129,6 @@ const Candidates: React.FC = () => {
         <DashboardLayout>
             <h2 className="text-2xl font-bold mb-4">Candidates</h2>
 
-            {/* Search + Sort + Filter */}
             <div className="flex flex-col md:flex-row gap-4 mb-4">
                 <input
                     type="text"
@@ -197,14 +189,12 @@ const Candidates: React.FC = () => {
                 </select>
             </div>
 
-            {/* Candidate Cards */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {paginatedCandidates.map((c) => (
                     <CandidateCard key={c.id} candidate={c} />
                 ))}
             </div>
 
-            {/* Pagination */}
             <div className="flex justify-center items-center gap-4 mt-6">
                 <button
                     disabled={currentPage === 1}

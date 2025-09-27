@@ -20,7 +20,6 @@ interface IFormInput {
 
 interface LoginResponse {
     accessToken: string;
-    // other properties from the API can be added here
 }
 
 interface ApiError {

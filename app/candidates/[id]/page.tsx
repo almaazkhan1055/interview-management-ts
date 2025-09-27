@@ -418,7 +418,6 @@ const CandidateDetail: React.FC = () => {
                     </div>
                 )}
 
-                {/* Manage Roles Tab (Admin Only) */}
                 {activeTab === "manageRoles" && userRole === "admin" && (
                     <div className="bg-white rounded-xl shadow-sm p-6">
                         <h3 className="text-lg font-semibold text-gray-900 mb-4">Manage Roles & Permissions</h3>

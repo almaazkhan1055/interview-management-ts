@@ -36,7 +36,6 @@ const Header: React.FC = () => {
                 </div>
             </header>
 
-            {/* Logout Confirmation Modal */}
             {showLogoutConfirm && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
                     <div className="bg-white rounded-xl shadow-2xl max-w-md w-full p-6 animate-scale-in">
