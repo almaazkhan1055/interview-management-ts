@@ -8,7 +8,7 @@ import { IoLogInOutline } from "react-icons/io5";
 import { ImSpinner9 } from "react-icons/im";
 import { MdErrorOutline } from "react-icons/md";
 import { FaAngleDown } from "react-icons/fa6";
-import { loginSuccess } from "../store/authSlice";
+import { login } from "../store/authSlice";
 
 type Role = "admin" | "ta_member" | "panelist" | "";
 
@@ -56,11 +56,8 @@ const LoginForm: React.FC = () => {
 
             const result = response.data;
 
-            sessionStorage.setItem("token", result.accessToken);
-            localStorage.setItem("role", data.role);
-
             dispatch(
-                loginSuccess({
+                login({
                     token: result.accessToken,
                     role: data.role,
                     username: data.username,
@@ -86,7 +83,7 @@ const LoginForm: React.FC = () => {
 
                 <div className="bg-gradient-to-r from-blue-600 to-indigo-700 py-6 px-8 text-center">
                     <h1 className="text-3xl font-bold text-white mb-2">Welcome Back</h1>
-                    <p className="text-blue-100">username:emilys password:emilyspass</p>
+                    <p className="text-blue-100">Please log in to continue</p>
                 </div>
 
                 <div className="p-8">

@@ -1,17 +1,21 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Interview Management System (IMS)
+
+This is a web application for managing the interview process for candidates. It provides different views and permissions based on user roles (Admin, TA Member, Panelist).
 
 ## Getting Started
 
-First, run the development server:
+To get the development environment running, follow these steps:
 
 ```bash
+# 1. Clone the repository
+git clone <repository-url>
+cd ims
+
+# 2. Install dependencies
+npm install
+
+# 3. Run the development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
@@ -29,8 +33,6 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+# folder structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
++ims/ +├── app/ +│ ├── (pages)/ # Route groups +│ │ ├── candidates/ +│ │ │ ├── [id]/page.tsx # Candidate Detail Page +│ │ │ └── page.tsx # Candidate List Page +│ │ ├── dashboard/ +│ │ │ └── page.tsx # Dashboard Page +│ │ └── login/ +│ │ └── page.tsx # Login Page +│ ├── components/ # Reusable components +│ │ ├── CandidateCard/ +│ │ ├── header/ +│ │ └── sidebar/ +│ ├── store/ # Redux store, slices, and providers +│ ├── dashboardLayout.tsx # Layout for authenticated pages +│ ├── layout.tsx # Root layout +│ └── page.tsx # Root page (redirects to /login) +└── public/ # Static assets + + +## Roles and Permissions + +The application has three distinct user roles, each with different capabilities. Authentication is mocked, and the role is selected at login and stored in localStorage. + +| Feature / Action | Admin | TA Member | Panelist | +| ---------------------------- | :---: | :-------: | :------: | +| View Dashboard | ✅ | ✅ | ✅ | +| View Candidate List | ✅ | ✅ | ✅ | +| View Candidate Details | ✅ | ✅ | ✅ | +| View Candidate Feedback | ✅ | ✅ | ✅ | | | | | | +| Submit Feedback for Candidate| ❌ | ❌ | ✅ | +| Manage Roles & Permissions | ✅ | ❌ | ❌ | + +## UI Security Coverage (OWASP Top 10) + +While backend security is paramount, the frontend incorporates several best practices to mitigate risks related to the OWASP Top 10. + +1.
